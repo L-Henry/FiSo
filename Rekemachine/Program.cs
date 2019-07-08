@@ -145,7 +145,57 @@ namespace Rekemachine
                     return Bereken(alles.Substring(0, Index - i) + min + alles.Substring(Index + j + 1, lengte - 1 - Index - j));
                 }
             }
+            //vergelijk
+            for (int tel = 1; tel < lengte; tel++)
+            {
+                if ( alles[tel] == '=' && Char.IsNumber(alles[tel - 1]) )
+                {
+                    int Index = tel;
+                    int i = 0;
+                    int j = 1;
+
+                    while (Index - i > 0 && (Char.IsNumber(alles[Index - 1 - i]) || alles[Index - 1 - i] == '-' || alles[Index - 1 - i] == ',')) //&& ( minIndex > 1 && Char.IsSymbol(alles[minIndex - i - 1]) ) ) ) )
+                    {
+                        i++;
+                    }
+                    while (Index + j < lengte - 1 && (Char.IsNumber(alles[Index + j + 1]) || alles[Index + j + 1] == ',' || (Char.IsSymbol(alles[Index]) && Char.IsSymbol(alles[Index + 1]))))
+                    {
+                        j++;
+                    }
+
+                    double min1 = double.Parse(alles.Substring(Index - i, i));
+                    double min2 = double.Parse(alles.Substring(Index + 1, j));
+                    double min;
+                    if (min1 == min2)
+                    {
+                        min = 1;
+                        Console.WriteLine($"{min1} is gelijk aan {min2}");
+                    }
+                    else
+                    {
+                        min = 0;
+                        Console.WriteLine($"{min1} is niet gelijk gelijk aan {min2}");
+
+                    }
+                    return min;
+                }
+            }
             return 0;
+        }
+
+        public bool IsGelijk(double min1, double min2)
+        {
+            if (min1 == min2)
+            {
+                Console.WriteLine($"{min1} is gelijk aan {min2}");
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine($"{min1} is niet gelijk gelijk aan {min2}");
+                return false;
+            }
         }
 
 
